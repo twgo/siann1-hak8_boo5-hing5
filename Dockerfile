@@ -15,6 +15,7 @@ RUN apt-get install -y python3-pip
 RUN pip3 install --upgrade pip
 
 ## Switch locale
+RUN apt-get install -y locales
 RUN locale-gen zh_TW.UTF-8
 ENV LC_ALL zh_TW.UTF-8
 
