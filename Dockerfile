@@ -4,14 +4,23 @@ MAINTAINER sih4sing5hong5
 ENV CPU_CORE 4
 
 # 準備環境
-RUN apt-get update -qq
-RUN apt-get install -y python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make  # 工具
-RUN apt-get install -y libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev # libx11-dev:i386 # HTK
-RUN apt-get install -y csh # SPTK
-RUN apt-get install -y bzip2 wget  # kaldi/tool
-RUN apt-get install -y libatlas-dev libatlas-base-dev  # kaldi/src
-RUN apt-get install -y moreutils  # ts 指令
-RUN apt-get install -y python3-pip
+RUN \
+  apt-get update -qq && \
+  apt-get install -y \ 
+  python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make \
+  libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev \
+  csh \
+  bzip2 wget \
+  libatlas-dev libatlas-base-dev \
+  moreutils \
+  python3-pip
+#  apt-get install -y python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make  # 工具 && \
+#  apt-get install -y libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev # libx11-dev:i386 # HTK && \
+#  apt-get install -y csh # SPTK && \
+#  apt-get install -y bzip2 wget  # kaldi/tool && \
+#  apt-get install -y libatlas-dev libatlas-base-dev  # kaldi/src && \
+#  apt-get install -y moreutils  # ts 指令 && \
+#  apt-get install -y python3-pip
 RUN pip3 install --upgrade pip
 
 ## Switch locale
