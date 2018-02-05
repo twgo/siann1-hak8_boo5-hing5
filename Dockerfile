@@ -59,7 +59,7 @@ WORKDIR /usr/local/hok8-bu7/
 RUN python3 manage.py migrate
 
 RUN python3 manage.py 匯入台文語料庫2版 /usr/local/gi2_liau7_khoo3/gi2_liau7_khoo3/twisas2.json
-RUN python3 manage.py 匯入TW01 tw01
+# RUN python3 manage.py 匯入TW01 tw01
 
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
 RUN python3 manage.py 匯出Kaldi格式資料 臺語 $KALDI_S5C
