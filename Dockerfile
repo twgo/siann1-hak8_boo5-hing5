@@ -36,18 +36,34 @@ RUN ./configure && make depend -j $CPU_CORE && make -j $CPU_CORE
 WORKDIR /usr/local/
 RUN git clone https://github.com/sih4sing5hong5/hok8-bu7.git
 
+# 掠語料
+# download twisas
+RUN git clone ssh:////home/ihc/pian3sik4
+
+RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
+WORKDIR /usr/local/gi2_liau7_khoo3/
+RUN ln -s /usr/local/pian3sik4/twisas/db.sqlite3.20180102-2134 db.sqlite3 && ln -s /usr/local/pian3sik4/twisas/音檔 .
+RUN python3 manage.py 匯出2版語料
+
+##  匯入語料
 WORKDIR /usr/local/hok8-bu7/
 RUN python3 manage.py migrate
 
-# 掠語料
-# download twisas
-# python manage.py 匯入台文語料庫2版 ~/git/gi2_liau7_khoo3/twisas2.json
+RUN python3 manage.py 匯入台文語料庫2版 /usr/local/gi2_liau7_khoo3/gi2_liau7_khoo3/twisas2.json
+RUN python3 manage.py 匯入TW01 tw01
 
-# download tw01
-# COPY tw01 tw01
-# RUN python3 manage.py 匯入TW01 tw01
+ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
+RUN python3 manage.py 匯出Kaldi格式資料 臺語 $KALDI_S5C
 
-RUN python3 manage.py 匯出Kaldi格式資料 臺語 /usr/local/kaldi/egs/taiwanese/s5c
+## 準備free-syllable的inside test
+RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisas-text
+RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/dev
+RUN python3 manage.py 轉Kaldi音節fst 臺語 $KALDI_S5C/twisas-text $KALDI_S5C
 
-WORKDIR /usr/local/kaldi/egs/taiwanese/s5c
+
+WORKDIR $KALDI_S5C
+RUN git pull
 RUN bash -c 'time bash -x 走訓練.sh  2>&1 | ts "[%Y-%m-%d %H:%M:%S]" | tee log_run'
+RUN bash -c 'time bash -x 走評估.sh data/lang_free'
+RUN bash -c 'time bash -x 看結果.sh'
+
