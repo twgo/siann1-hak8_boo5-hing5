@@ -59,7 +59,7 @@ RUN ln -s /usr/local/pian7sik4/twisas/db.sqlite3.20180102-2134 db.sqlite3 && ln 
 RUN pip3 install -r requirements.txt
 RUN apt-get install -y normalize-audio sox
 RUN git fetch origin && git branch -a
-RUN git checkout 匯出的內容愛是分詞形式 -b 匯出的內容愛是分詞形式
+RUN git checkout origin/匯出的內容愛是分詞形式 -b 匯出的內容愛是分詞形式
 RUN python3 manage.py 匯出2版語料
 
 ##  匯入語料
