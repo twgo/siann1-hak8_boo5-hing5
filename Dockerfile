@@ -47,11 +47,12 @@ RUN git clone https://github.com/sih4sing5hong5/hok8-bu7.git
 
 # 掠語料
 # download twisas
-RUN git clone ssh:////home/ihc/pian3sik4
+# RUN git clone ssh:////home/ihc/pian7sik4
+COPY pian7sik4 pian7sik4
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
-RUN ln -s /usr/local/pian3sik4/twisas/db.sqlite3.20180102-2134 db.sqlite3 && ln -s /usr/local/pian3sik4/twisas/音檔 .
+RUN ln -s /usr/local/pian7sik4/twisas/db.sqlite3.20180102-2134 db.sqlite3 && ln -s /usr/local/pian7sik4/twisas/音檔 .
 RUN python3 manage.py 匯出2版語料
 
 ##  匯入語料
