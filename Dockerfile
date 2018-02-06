@@ -84,7 +84,7 @@ RUN python3 manage.py 轉Kaldi音節fst 臺語 $KALDI_S5C/twisas-text $KALDI_S5C
 WORKDIR $KALDI_S5C
 RUN git pull
 RUN bash -c 'time bash -x 走訓練.sh  2>&1 | ts "[%Y-%m-%d %H:%M:%S]" | tee log_run'
-RUN bash -c 'time bash -x 產生free-syllable的graph.sh data/dev/'
+RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
 RUN bash -c 'time bash -x 走評估.sh data/lang_free'
 RUN bash -c 'time bash -x 看結果.sh'
 
