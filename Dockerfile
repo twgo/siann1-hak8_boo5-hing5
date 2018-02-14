@@ -87,5 +87,5 @@ RUN git pull
 RUN bash -c 'time bash -x 走訓練.sh  2>&1 | ts "[%Y-%m-%d %H:%M:%S]" | tee log_run'
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
 RUN bash -c 'time bash -x 走評估.sh data/lang_free'
-RUN bash -c 'time bash -x 看結果.sh'
+RUN bash -c 'time bash 看結果.sh'
 
