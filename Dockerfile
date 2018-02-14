@@ -6,7 +6,7 @@ ENV CPU_CORE 4
 # 準備環境
 RUN \
   apt-get update -qq && \
-  apt-get install -y \ 
+  apt-get install -y \
   python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make \
   libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev \
   csh \
@@ -15,7 +15,7 @@ RUN \
   moreutils \
   python3-pip
 # 後擺整理來面頂   normalize-audio sox
- 
+
 #  apt-get install -y python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make  # 工具 && \
 #  apt-get install -y libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev # libx11-dev:i386 # HTK && \
 #  apt-get install -y csh # SPTK && \
@@ -51,6 +51,7 @@ RUN git clone https://github.com/sih4sing5hong5/hok8-bu7.git
 # 掠語料
 # download twisas
 # RUN git clone ssh:////home/ihc/pian7sik4
+RUN git clone ssh://git@172.16.3.126/home/ihc/pian7sik4
 COPY pian7sik4 pian7sik4
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
@@ -87,5 +88,5 @@ RUN git pull
 RUN bash -c 'time bash -x 走訓練.sh  2>&1 | ts "[%Y-%m-%d %H:%M:%S]" | tee log_run'
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
 RUN bash -c 'time bash -x 走評估.sh data/lang_free'
-RUN bash -c 'time bash 看結果.sh'
 
+RUN bash -c 'time bash 看結果.sh'
