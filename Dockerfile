@@ -51,8 +51,8 @@ RUN git clone https://github.com/sih4sing5hong5/hok8-bu7.git
 # 掠語料
 # download twisas
 # RUN git clone ssh:////home/ihc/pian7sik4
-RUN git clone ssh://git@172.16.3.126/home/ihc/pian7sik4
-COPY pian7sik4 pian7sik4
+RUN git clone http://lfs@172.16.3.136/twisas.git
+COPY twisas/pian7sik4 pian7sik4
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
