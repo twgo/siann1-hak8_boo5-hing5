@@ -1,6 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER sih4sing5hong5
 
+ARG CACHEBUST=1
 ENV CPU_CORE 4
 
 # 準備環境
