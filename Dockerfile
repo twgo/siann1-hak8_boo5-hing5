@@ -53,7 +53,9 @@ RUN git clone https://github.com/sih4sing5hong5/hok8-bu7.git
 WORKDIR /usr/local/
 RUN git clone http://lfs:lfs@172.16.3.136/twisas.git
 WORKDIR /usr/local/twisas
-ADD ./pian7sik4 pian7sik4
+RUN ls
+RUN pwd
+ADD pian7sik4 pian7sik4
 WORKDIR /usr/local/
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
