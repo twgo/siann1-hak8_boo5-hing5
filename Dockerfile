@@ -52,8 +52,9 @@ RUN git clone https://github.com/sih4sing5hong5/hok8-bu7.git
 # 掠語料
 # download twisas
 WORKDIR /usr/local/
-RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-RUN sudo apt-get install git-lfs
+RUN apt-get install curl
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+RUN apt-get install git-lfs
 RUN git lfs install
 RUN git lfs clone -b 0222a http://lfs:lfs@172.16.3.136/twisas.git
 
