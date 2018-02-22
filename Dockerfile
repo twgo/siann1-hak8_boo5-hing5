@@ -52,7 +52,7 @@ RUN git clone https://github.com/sih4sing5hong5/hok8-bu7.git
 # 掠語料
 # download twisas
 WORKDIR /usr/local/
-RUN git clone -b 0221 http://lfs:lfs@172.16.3.136/twisas.git
+RUN git clone -b 0222 http://lfs:lfs@172.16.3.136/twisas.git
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
