@@ -55,7 +55,7 @@ WORKDIR /usr/local/
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 RUN sudo apt-get install git-lfs
 RUN git lfs install
-RUN git lfs clone -b 0222 http://lfs:lfs@172.16.3.136/twisas.git
+RUN git lfs clone -b 0222a http://lfs:lfs@172.16.3.136/twisas.git
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
