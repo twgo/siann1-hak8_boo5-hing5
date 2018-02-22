@@ -59,7 +59,7 @@ RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
 RUN ln -s /usr/local/twisas/pian7sik4/twisas/db.sqlite3.20180102-2134 db.sqlite3 && ln -s /usr/local/twisas/pian7sik4/twisas/音檔 .
 RUN pip3 install -r requirements.txt
-RUN apt-get install -y normalize-audio sox
+RUN apt-get install -y normalize-audio sox ffmpeg
 RUN git fetch origin && git branch -a
 RUN git checkout origin/匯出的內容愛是分詞形式 -b 匯出的內容愛是分詞形式
 RUN python3 manage.py 匯出2版語料
