@@ -1,6 +1,6 @@
+FROM ubuntu:16.04
 ARG CACHEBUST=1
 
-FROM ubuntu:16.04
 MAINTAINER sih4sing5hong5
 
 ENV CPU_CORE 4
