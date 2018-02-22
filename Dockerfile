@@ -1,5 +1,4 @@
 FROM ubuntu:16.04
-ARG CACHEBUST=1
 
 MAINTAINER sih4sing5hong5
 
