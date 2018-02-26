@@ -56,7 +56,7 @@ RUN apt-get install curl
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 RUN apt-get install git-lfs
 RUN git lfs install
-RUN git lfs clone -b 0226 https://git@github.com/twgo/siann1-hak8_boo5-hing5-wav.git
+RUN git lfs clone -b 0226 https://github.com/twgo/siann1-hak8_boo5-hing5-wav.git
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
