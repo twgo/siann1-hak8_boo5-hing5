@@ -50,7 +50,6 @@ WORKDIR /usr/local/
 RUN git clone https://github.com/sih4sing5hong5/hok8-bu7.git
 
 # 掠語料
-# download twisas
 WORKDIR /usr/local/
 RUN apt-get install curl
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
