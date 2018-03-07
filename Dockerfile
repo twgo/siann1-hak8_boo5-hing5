@@ -73,7 +73,7 @@ RUN python3 manage.py migrate
 RUN pip3 uninstall -y hue7jip8 && pip3 install https://github.com/Taiwanese-Corpus/hue7jip8/archive/%E5%8C%AF%E5%85%A5%E5%8F%B0%E6%96%87%E8%AA%9E%E6%96%99%E5%BA%AB.zip
 RUN pip3 uninstall -y tai5-uan5_gian5-gi2_hok8-bu7 && pip3 install https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 RUN python3 manage.py 匯入台文語料庫2版 /usr/local/gi2_liau7_khoo3/twisas2.json
-RUN python3 manage.py 匯入TW01 /usr/local/pian7sik4_gi2liau7/tw01
+RUN python3 manage.py 匯入TW01 /usr/local/pian7sik4_gi2liau7/TW01
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
