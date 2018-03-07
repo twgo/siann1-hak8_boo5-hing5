@@ -14,8 +14,8 @@ RUN \
   bzip2 wget \
   libatlas-dev libatlas-base-dev \
   moreutils \
-  python3-pip
-# 後擺整理來面頂   normalize-audio sox
+  python3-pip \
+  normalize-audio sox
 
 #  apt-get install -y python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make  # 工具 && \
 #  apt-get install -y libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev # libx11-dev:i386 # HTK && \
@@ -24,7 +24,7 @@ RUN \
 #  apt-get install -y libatlas-dev libatlas-base-dev  # kaldi/src && \
 #  apt-get install -y moreutils  # ts 指令 && \
 #  apt-get install -y python3-pip
-# normalize-audio # 語料庫愛的
+# normalize-audio sox # 語料庫愛的
 RUN pip3 install --upgrade pip
 
 ## Switch locale
@@ -61,7 +61,6 @@ RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
 RUN ln -s /usr/local/pian7sik4_gi2liau7/twisas/db.sqlite3.20180102-2134 db.sqlite3 && ln -s /usr/local/pian7sik4_gi2liau7/twisas/音檔 .
 RUN pip3 install -r requirements.txt
-RUN apt-get install -y normalize-audio sox
 RUN git fetch origin && git branch -a
 RUN git checkout origin/匯出的內容愛是分詞形式 -b 匯出的內容愛是分詞形式
 RUN python3 manage.py 匯出2版語料
@@ -82,14 +81,16 @@ RUN python3 manage.py 匯出Kaldi格式資料 臺語 $KALDI_S5C
 
 ## 準備free-syllable的inside test
 RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisas-text
-RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/dev
+RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/train_free
 RUN python3 manage.py 轉Kaldi音節fst 臺語 $KALDI_S5C/twisas-text $KALDI_S5C
 
 
 WORKDIR $KALDI_S5C
 RUN git pull
 RUN bash -c 'time bash -x 走訓練.sh  2>&1 | ts "[%Y-%m-%d %H:%M:%S]" | tee log_run'
+
+RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
-RUN bash -c 'time bash -x 走評估.sh data/lang_free data/dev'
+RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
