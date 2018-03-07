@@ -82,14 +82,15 @@ RUN python3 manage.py 匯出Kaldi格式資料 臺語 $KALDI_S5C
 
 ## 準備free-syllable的inside test
 RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisas-text
-RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/dev
+RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/train_free
 RUN python3 manage.py 轉Kaldi音節fst 臺語 $KALDI_S5C/twisas-text $KALDI_S5C
 
 
 WORKDIR $KALDI_S5C
 RUN git pull
 RUN bash -c 'time bash -x 走訓練.sh  2>&1 | ts "[%Y-%m-%d %H:%M:%S]" | tee log_run'
+RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
-RUN bash -c 'time bash -x 走評估.sh data/lang_free data/dev'
+RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
