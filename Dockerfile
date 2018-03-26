@@ -55,7 +55,8 @@ RUN apt-get install curl
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 RUN apt-get install git-lfs
 RUN git lfs install
-RUN git lfs clone -b new_server https://github.com/twgo/pian7sik4_gi2liau7.git
+RUN echo 20180326+20180207twisas
+RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
