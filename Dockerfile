@@ -60,6 +60,7 @@ RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
+RUN git checkout 5b0a69667ce80a101b9528bdf411d6d456c88e56 # Date: Nov 13 19:02:54 2017 -0600
 RUN ln -s /usr/local/pian7sik4_gi2liau7/twisas/db.sqlite3.20171110-1919 db.sqlite3 && ln -s /usr/local/pian7sik4_gi2liau7/twisas/音檔 .
 RUN pip3 install -r requirements.txt
 RUN git fetch origin && git branch -a
