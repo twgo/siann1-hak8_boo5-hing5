@@ -60,11 +60,9 @@ RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
-RUN git checkout 5b0a69667ce80a101b9528bdf411d6d456c88e56 # Date: Nov 13 19:02:54 2017 -0600
+RUN git checkout 41c8e1e2af0c30509fae5eb08eb67160377ba664 # Date:   Tue Nov 7 11:55:03 2017 +0800 專門匯出的branch
 RUN ln -s /usr/local/pian7sik4_gi2liau7/twisas/db.sqlite3.20171110-1919 db.sqlite3 && ln -s /usr/local/pian7sik4_gi2liau7/twisas/音檔 .
-RUN pip3 install -r requirements.txt
-RUN git fetch origin && git branch -a
-RUN git checkout origin/匯出的內容愛是分詞形式 -b 匯出的內容愛是分詞形式
+RUN pip3 install Taiwanese-Speech-And-Text-Corpus kau3-tian2_iong7-ji7 praatIO Pyro4 whitenoise
 RUN python3 manage.py 匯出2版語料
 
 ##  匯入語料
