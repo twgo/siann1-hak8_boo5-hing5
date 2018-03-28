@@ -95,3 +95,10 @@ RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
+
+# 印開發環境
+WORKDIR /usr/local/kaldi/tools
+RUN git log -1 --format="%H"
+
+RUN pip3 freeze
+
