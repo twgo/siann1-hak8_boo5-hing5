@@ -81,7 +81,7 @@ RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
 RUN pip3 install --upgrade https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_hok8-bu7/archive/%E8%BC%B8%E5%87%BA%E8%BE%AD%E5%85%B8%E6%A8%A1%E7%B5%84%E5%8C%96.zip
-RUN python3 manage.py 匯出Kaldi格式資料 拆做聲韻 臺語 $KALDI_S5C
+RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻 $KALDI_S5C
 
 ## 準備free-syllable的inside test
 RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisas-text
