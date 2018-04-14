@@ -70,6 +70,8 @@ RUN python3 manage.py 匯出2版語料
 WORKDIR /usr/local/hok8-bu7/
 RUN echo tw01==0.2.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01
+## 0414
+RUN git pull
 RUN python3 manage.py migrate
 
 RUN pip3 uninstall -y hue7jip8 && pip3 install https://github.com/Taiwanese-Corpus/hue7jip8/archive/%E5%8C%AF%E5%85%A5%E5%8F%B0%E6%96%87%E8%AA%9E%E6%96%99%E5%BA%AB.zip
