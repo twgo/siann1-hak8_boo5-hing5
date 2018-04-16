@@ -69,7 +69,7 @@ RUN python3 manage.py 匯出2版語料
 ##  匯入語料
 WORKDIR /usr/local/hok8-bu7/
 RUN echo tw01==0.2.2
-RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01
+RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
 ## 0414
 RUN git pull
 RUN python3 manage.py migrate
