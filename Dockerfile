@@ -101,8 +101,9 @@ RUN git pull
 RUN sed 's/nj\=16/nj\=4/g' -i 走訓練.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1 | ts "[%Y-%m-%d %H:%M:%S]" | tee log_run'
 
-RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
+RUN utils/subset_data_dir.sh --first data/train_free 20 data/train_dev
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
+RUN sed 's/nj\=4/nj\=1/g' -i 走評估.sh
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
