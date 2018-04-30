@@ -97,6 +97,7 @@ RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twi
 
 
 WORKDIR $KALDI_S5C
+RUN echo 0430-1018
 RUN git pull
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
