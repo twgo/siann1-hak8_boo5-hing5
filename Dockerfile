@@ -89,7 +89,7 @@ RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻 $KALDI_S5C/twisas-te
 
 WORKDIR $KALDI_S5C
 RUN git pull
-RUN bash -c 'time bash -x 走訓練.sh  2>&1 | ts "[%Y-%m-%d %H:%M:%S]" | tee log_run'
+RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
