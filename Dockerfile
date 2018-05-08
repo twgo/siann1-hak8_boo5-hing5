@@ -69,20 +69,24 @@ RUN python3 manage.py 匯出2版語料
 ##  匯入語料
 WORKDIR /usr/local/hok8-bu7/
 RUN git pull
+RUN echo 0509
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
-RUN python3 manage.py migrate
 
-RUN pip3 uninstall -y tai5-uan5_gian5-gi2_hok8-bu7 && pip3 install https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_kang1-ku7/archive/master.zip
+
+RUN python3 manage.py migrate
 RUN python3 manage.py 匯入台文語料庫2版 /usr/local/gi2_liau7_khoo3/twisas2.json
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
-RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻 $KALDI_S5C
+RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻莫調 $KALDI_S5C
+
 
 ## 準備free-syllable的inside test
 RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisas-text
 RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/train_free
-RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻 $KALDI_S5C/twisas-text $KALDI_S5C
+RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twisas-text $KALDI_S5C
 
 
 WORKDIR $KALDI_S5C
@@ -95,7 +99,3 @@ RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
 
-WORKDIR /usr/local/kaldi/tools
-RUN git log -1 --format="%H"
-
-RUN pip3 freeze
