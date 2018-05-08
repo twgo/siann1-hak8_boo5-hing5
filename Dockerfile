@@ -84,7 +84,7 @@ RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
 RUN echo 0508
-RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_kang1-ku7/archive/%E8%A3%9C%E9%80%9A%E7%94%A8%E6%8B%BC%E9%9F%B3.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_kang1-ku7/archive/master.zip
 RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/%E9%80%9A%E7%94%A8kaldi.zip
 RUN sed 's/臺灣閩南語羅馬字拼音/通用拼音音標/g' -i hok8_bu7/settings.py
 RUN sed 's/通用拼音音標相容教會羅馬字音標/臺灣閩南語羅馬字拼音相容教會羅馬字音標/g' -i hok8_bu7/settings.py
