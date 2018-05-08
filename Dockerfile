@@ -73,7 +73,7 @@ RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
 RUN git pull
 RUN python3 manage.py migrate
 
-RUN pip3 install --upgrade https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 # RUN python3 manage.py 匯入台文語料庫2版 /usr/local/gi2_liau7_khoo3/twisas2.json
 RUN python3 manage.py 匯入TW01 /usr/local/pian7sik4_gi2liau7/TW01
 RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
@@ -81,8 +81,8 @@ RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
 RUN echo 0508
-RUN pip3 install --upgrade https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_kang1-ku7/archive/master.zip
-RUN pip3 install --upgrade https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_hok8-bu7/archive/%E6%8B%86%E5%81%9A%E8%81%B2%E9%9F%BB%E8%8E%AB%E8%AA%BF.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_kang1-ku7/archive/master.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/%E6%8B%86%E5%81%9A%E8%81%B2%E9%9F%BB%E8%8E%AB%E8%AA%BF.zip
 RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻莫調 $KALDI_S5C
 
 ## 準備free-syllable的inside test
