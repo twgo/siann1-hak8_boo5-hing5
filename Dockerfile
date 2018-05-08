@@ -74,7 +74,7 @@ RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
 RUN git pull
 RUN python3 manage.py migrate
 
-RUN pip3 install --upgrade https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 # RUN python3 manage.py 匯入台文語料庫2版 /usr/local/gi2_liau7_khoo3/twisas2.json
 # 匯通用
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/%E7%9B%B4%E6%8E%A5%E7%94%A8%E9%80%9A%E7%94%A8%E6%8B%BC%E9%9F%B3.zip
@@ -84,8 +84,8 @@ RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
 RUN echo 0508
-RUN pip3 install --upgrade https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_kang1-ku7/archive/%E8%A3%9C%E9%80%9A%E7%94%A8%E6%8B%BC%E9%9F%B3.zip
-RUN pip3 install --upgrade https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_hok8-bu7/archive/%E9%80%9A%E7%94%A8kaldi.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_kang1-ku7/archive/%E8%A3%9C%E9%80%9A%E7%94%A8%E6%8B%BC%E9%9F%B3.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/%E9%80%9A%E7%94%A8kaldi.zip
 RUN sed 's/臺灣閩南語羅馬字拼音/通用拼音音標/g' -i hok8_bu7/settings.py
 RUN sed 's/通用拼音音標相容教會羅馬字音標/臺灣閩南語羅馬字拼音相容教會羅馬字音標/g' -i hok8_bu7/settings.py
 RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻莫調 $KALDI_S5C
