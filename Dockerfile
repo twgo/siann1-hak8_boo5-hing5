@@ -73,8 +73,8 @@ RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
 RUN git pull
 RUN python3 manage.py migrate
 
-RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
-# RUN python3 manage.py 匯入台文語料庫2版 /usr/local/gi2_liau7_khoo3/twisas2.json
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/free-syllable%E7%84%A1%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%86%E8%A9%9E%E5%9E%8B%E5%BC%8F.zip
+RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/%E9%81%95%E6%B3%95%E9%9F%B3%E6%A8%99%E7%95%B6%E5%81%9ASPN.zip
 RUN python3 manage.py 匯入TW01 /usr/local/pian7sik4_gi2liau7/TW01
 RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
 
