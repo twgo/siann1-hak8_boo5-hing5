@@ -58,31 +58,20 @@ RUN git lfs install
 RUN echo 20180326+20180207twisas
 RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 
-RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
-WORKDIR /usr/local/gi2_liau7_khoo3/
-RUN ln -s /usr/local/pian7sik4_gi2liau7/twisas/db.sqlite3.20180102-2134 db.sqlite3 && ln -s /usr/local/pian7sik4_gi2liau7/twisas/音檔 .
-RUN pip3 install -r requirements.txt
-RUN git fetch origin && git branch -a
-RUN git checkout origin/匯出的內容愛是分詞形式 -b 匯出的內容愛是分詞形式
-RUN python3 manage.py 匯出2版語料
-
 ##  匯入語料
 WORKDIR /usr/local/hok8-bu7/
-RUN echo tw01==0.2.2
+RUN echo tw01==0.3.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_kang1-ku7/archive/%E8%87%BA%E7%BE%85-%E9%80%9A%E7%94%A8_%E8%BC%83%E5%9A%B4%E7%9A%84%E8%BD%89%E6%8F%9B%EF%BC%8C%E8%BD%89%E8%A2%82%E9%81%8E%E5%B0%B1%E9%8C%AF%E8%AA%A4.zip
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 RUN git pull
 RUN python3 manage.py migrate
 
-RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/free-syllable%E7%84%A1%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%86%E8%A9%9E%E5%9E%8B%E5%BC%8F.zip
-RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/%E9%81%95%E6%B3%95%E9%9F%B3%E6%A8%99%E7%95%B6%E5%81%9ASPN.zip
 RUN python3 manage.py 匯入TW01 /usr/local/pian7sik4_gi2liau7/TW01
 RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
-RUN echo 0508
-RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_kang1-ku7/archive/master.zip
-RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/%E6%8B%86%E5%81%9A%E8%81%B2%E9%9F%BB%E8%8E%AB%E8%AA%BF.zip
 RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻莫調 $KALDI_S5C
 
 ## 準備free-syllable的inside test
