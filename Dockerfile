@@ -84,6 +84,7 @@ WORKDIR $KALDI_S5C
 RUN git pull
 RUN mv data/train data/train_guan5
 RUN utils/data/perturb_data_dir_speed_3way.sh data/train_guan5 data/train
+COPY 走訓練.sh 走訓練.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
