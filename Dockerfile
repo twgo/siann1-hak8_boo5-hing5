@@ -82,8 +82,6 @@ RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twi
 
 WORKDIR $KALDI_S5C
 RUN git pull
-RUN mv data/train data/train_guan5
-RUN utils/data/perturb_data_dir_speed_3way.sh data/train_guan5 data/train
 COPY 走訓練.sh 走訓練.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
@@ -92,4 +90,3 @@ RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
-
