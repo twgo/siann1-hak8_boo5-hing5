@@ -99,4 +99,3 @@ RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN echo 0606
 RUN bash -c 'time bash 看結果.sh'
-
