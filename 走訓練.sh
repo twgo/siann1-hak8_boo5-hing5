@@ -15,7 +15,7 @@ fi
 echo "stage = $STAGE"
 
 
-nj=16
+nj=32
 
 # GMM Acoustic model parameters
 numLeaves=3000
@@ -23,9 +23,9 @@ numGauss=30000
 
 
 if [ $STAGE -le 1 ]; then
+  utils/utt2spk_to_spk2utt.pl data/train/utt2spk > data/train/spk2utt
   mv data/train data/train_guan5
   utils/data/perturb_data_dir_speed_3way.sh data/train_guan5 data/train
-  utils/utt2spk_to_spk2utt.pl data/train/utt2spk > data/train/spk2utt
 fi
 
 if [ $STAGE -le 2 ]; then
