@@ -90,6 +90,6 @@ RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
 COPY 走評估.sh 走評估.sh
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
-RUN echo 060715
+RUN echo 06071538
 COPY 看結果.sh 看結果.sh
 RUN bash -c 'time bash 看結果.sh'
