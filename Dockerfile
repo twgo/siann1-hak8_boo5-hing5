@@ -79,6 +79,8 @@ RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisa
 RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/train_free
 RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twisas-text $KALDI_S5C
 
+## 準備 8K wav.scp 模擬電話音質
+RUN sed -z 's/\n/avconv -i - -ar 8000 - \|\n/g' $KALDI_S5C/data/train/wav.scp
 
 WORKDIR $KALDI_S5C
 RUN git pull
@@ -89,4 +91,3 @@ RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
-
