@@ -7,7 +7,7 @@ ENV CPU_CORE 4
 # 準備環境
 RUN \
   apt-get update -qq && \
-  apt-get install -y \
+  apt-get install -y ffmpeg libav-tools\
   python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make \
   libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev \
   csh \
