@@ -15,7 +15,8 @@ RUN \
   libatlas-dev libatlas-base-dev \
   moreutils \
   python3-pip \
-  normalize-audio sox
+  normalize-audio sox \
+  ffmpeg libav-tools
 
 #  apt-get install -y python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make  # 工具 && \
 #  apt-get install -y libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev # libx11-dev:i386 # HTK && \
@@ -80,10 +81,11 @@ RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5
 RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twisas-text $KALDI_S5C
 
 ## 準備 8K a-law wav.scp 模擬電話音質
-RUN sed -z 's/\n/avconv -i - -f alaw -ar 8000 - | avconv -i - -f wav -ar 8000 -\|\n/g' $KALDI_S5C/data/train/wav.scp
+RUN sed -i -z 's/\n/avconv -i - -f alaw -ar 8000 - | avconv -f alaw -i - -f wav -ar 8000 -\|\n/g' $KALDI_S5C/data/train/wav.scp
 
 WORKDIR $KALDI_S5C
 RUN git pull
+COPY conf/mfcc.conf conf/mfcc.conf
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
