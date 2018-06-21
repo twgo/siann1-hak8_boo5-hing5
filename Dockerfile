@@ -7,7 +7,7 @@ ENV CPU_CORE 4
 # 準備環境
 RUN \
   apt-get update -qq && \
-  apt-get install -y \
+  apt-get install -y ffmpeg libav-tools\
   python3 g++ python3-dev libyaml-dev libxslt1-dev git subversion automake libtool zlib1g-dev libboost-all-dev libbz2-dev liblzma-dev libgoogle-perftools-dev libxmlrpc-c++.*-dev make \
   libc6-dev-i386 linux-libc-dev gcc-multilib libx11-dev \
   csh \
@@ -80,7 +80,7 @@ RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5
 RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twisas-text $KALDI_S5C
 
 ## 準備 8K wav.scp 模擬電話音質
-RUN sed -z 's/\n/avconv -i - -f wav -ar 8000 - \|\n/g' $KALDI_S5C/data/train/wav.scp
+RUN sed -i -z 's/\n/avconv -i - -f wav -ar 8000 - \|\n/g' $KALDI_S5C/data/train/wav.scp
 
 WORKDIR $KALDI_S5C
 RUN git pull
