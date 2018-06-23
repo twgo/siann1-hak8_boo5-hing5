@@ -81,15 +81,15 @@ RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5
 RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twisas-text $KALDI_S5C
 
 ## 準備 8K a-law wav.scp 模擬電話音質
-## RUN sed -i -z 's/\n/avconv -i - -f alaw -ar 8000 - | avconv -f alaw -i - -f wav -ar 8000 -\|\n/g' $KALDI_S5C/data/train/wav.scp
+RUN sed -i -z 's/\n/avconv -i - -f alaw -ar 8000 - | avconv -f alaw -i - -f wav -ar 8000 -\|\n/g' $KALDI_S5C/data/train/wav.scp
 
-## WORKDIR $KALDI_S5C
-## RUN git pull
-## COPY conf/mfcc.conf conf/mfcc.conf
-## RUN bash -c 'time bash -x 走訓練.sh  2>&1'
+WORKDIR $KALDI_S5C
+RUN git pull
+COPY conf/mfcc.conf conf/mfcc.conf
+RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
-## RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
-## RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
-## RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
- 
-## RUN bash -c 'time bash 看結果.sh'
+RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
+RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
+RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
+
+RUN bash -c 'time bash 看結果.sh'
