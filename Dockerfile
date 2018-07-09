@@ -80,8 +80,11 @@ RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisa
 RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/train_free
 RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twisas-text $KALDI_S5C
 
-## 準備 8K a-law wav.scp 模擬電話音質
-RUN sed -i -z 's/\n/avconv -i - -f alaw -ar 8000 - | avconv -f alaw -ar 8000 -i - -f wav -ar 8000 - |\n/g' $KALDI_S5C/data/train/wav.scp
+## 準備 8K a-law/mu-law 混合模擬電話音質
+RUN sed -z 's/\n/avconv -i - -f alaw -ar 8000 - | avconv -f alaw -ar 8000 -i - -f wav -ar 8000 - |\n/g' $KALDI_S5C/data/train/wav.scp > $KALDI_S5C/data/train/wav-alaw.scp
+RUN sed -z 's/\n/avconv -i - -f mulaw -ar 8000 - | avconv -f mulaw -ar 8000 -i - -f wav -ar 8000 - |\n/g' $KALDI_S5C/data/train/wav.scp > $KALDI_S5C/data/train/wav-mulaw.scp
+RUN cat $KALDI_S5C/data/train/wav-alaw.scp > $KALDI_S5C/data/train/wav.scp
+RUN cat $KALDI_S5C/data/train/wav-mulaw.scp >> $KALDI_S5C/data/train/wav.scp
 
 WORKDIR $KALDI_S5C
 RUN git pull
