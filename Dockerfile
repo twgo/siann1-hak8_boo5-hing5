@@ -87,7 +87,7 @@ WORKDIR $KALDI_S5C
 RUN git pull
 COPY conf/mfcc.conf conf/mfcc.conf
 
-sed -i 's/nj=16/nj=32/g' $KALDI_S5C/走訓練.sh
+RUN sed -i 's/nj=16/nj=32/g' $KALDI_S5C/走訓練.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
