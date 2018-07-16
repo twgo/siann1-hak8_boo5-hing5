@@ -65,7 +65,7 @@ cat $srcdir/utt2spk | utils/apply_map.pl -f 1 $destdir/utt_map  | \
 utils/utt2spk_to_spk2utt.pl <$destdir/utt2spk >$destdir/spk2utt
 
 if [ -f $srcdir/segments ]; then
-  sed -z 's/\n/avconv -i - -f wav -ar 8000 - | avconv -f factor -ar 8000 -i - -f wav -ar 8000 - |\n/g' $srcdir/wav.scp $destdir/wav.scp
+  sed -z "s/\n/avconv -i - -f wav -ar 8000 - | avconv -f $factor -ar 8000 -i - -f wav -ar 8000 - |\n/g" $srcdir/wav.scp $destdir/wav.scp
   # also apply the spk_prefix to the recording-ids.
 #   cat $srcdir/wav.scp | awk -v p=$spk_prefix '{printf("%s %s%s\n", $1, p, $1);}' > $destdir/reco_map
 #
