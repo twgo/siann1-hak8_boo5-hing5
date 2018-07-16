@@ -76,7 +76,7 @@ ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
 RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻莫調 $KALDI_S5C
 
 ## 準備 8K 音質
-## RUN sed -i -z 's/\n/avconv -i - -f wav -ar 8000 - |\n/g' $KALDI_S5C/data/train/wav.scp
+RUN sed -i -z 's/\n/avconv -i - -f wav -ar 8000 - |\n/g' $KALDI_S5C/data/train/wav.scp
 
 ## 準備free-syllable的inside test
 RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisas-text
