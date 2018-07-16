@@ -20,7 +20,7 @@ always_include_prefix=false
 . utils/parse_options.sh
 
 if [ $# != 2 ]; then
-  echo "Usage: perturb_data_dir_speed_alaw_mulaw.sh <srcdir> <destdir>"
+  echo "Usage: perturb_data_dir_speed_3way.sh <srcdir> <destdir>"
   echo "Applies alaw, mulaw encode"
   echo "e.g.:"
   echo " $0 [options] data/train data/train_sp"
