@@ -20,7 +20,7 @@ always_include_prefix=false
 . utils/parse_options.sh
 
 if [ $# != 2 ]; then
-  echo "Usage: perturb_data_dir_encode_alaw_mulaw.sh <srcdir> <destdir>"
+  echo "Usage: perturb_data_dir_speed_alaw_mulaw.sh <srcdir> <destdir>"
   echo "Applies alaw, mulaw encode"
   echo "e.g.:"
   echo " $0 [options] data/train data/train_sp"
@@ -50,8 +50,8 @@ fi
 echo "$0: making sure the utt2dur file is present in ${srcdir}"
 utils/data/get_utt2dur.sh ${srcdir}
 
-utils/data/perturb_data_dir_encode.sh alaw ${srcdir} ${destdir}_encode_alaw || exit 1
-utils/data/perturb_data_dir_encode.sh mulaw ${srcdir} ${destdir}_encode_mulaw || exit 1
+utils/data/perturb_data_dir_speed.sh alaw ${srcdir} ${destdir}_encode_alaw || exit 1
+utils/data/perturb_data_dir_speed.sh mulaw ${srcdir} ${destdir}_encode_mulaw || exit 1
 
 if $always_include_prefix; then
   utils/copy_data_dir.sh --spk-prefix sp1.0- --utt-prefix sp1.0- ${srcdir} ${destdir}encode_origin

@@ -16,9 +16,9 @@
 . utils/parse_options.sh
 
 if [ $# != 3 ]; then
-  echo "Usage: perturb_data_dir_encode.sh <warping-factor> <srcdir> <destdir>"
+  echo "Usage: perturb_data_dir_speed.sh <warping-factor> <srcdir> <destdir>"
   echo "e.g.:"
-  echo " $0 a-law data/train_si284 data/train_si284p"
+  echo " $0 alaw data/train_si284 data/train_si284p"
   exit 1
 fi
 

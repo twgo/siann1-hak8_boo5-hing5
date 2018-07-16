@@ -24,7 +24,7 @@ numGauss=30000
 if [ $STAGE -le 1 ]; then
   utils/utt2spk_to_spk2utt.pl data/train/utt2spk > data/train/spk2utt
   mv data/train data/train_guan5
-  utils/data/perturb_data_dir_encode.sh data/train_guan5 data/train
+  utils/data/perturb_data_dir_speed.sh data/train_guan5 data/train
 fi
 
 if [ $STAGE -le 2 ]; then
