@@ -50,22 +50,22 @@ fi
 echo "$0: making sure the utt2dur file is present in ${srcdir}"
 utils/data/get_utt2dur.sh ${srcdir}
 
-utils/data/perturb_data_dir_speed.sh alaw ${srcdir} ${destdir}_encode_alaw || exit 1
-utils/data/perturb_data_dir_speed.sh mulaw ${srcdir} ${destdir}_encode_mulaw || exit 1
+utils/data/perturb_data_dir_speed.sh alaw ${srcdir} ${destdir}_speed0.9 || exit 1
+utils/data/perturb_data_dir_speed.sh mulaw ${srcdir} ${destdir}_speed1.1 || exit 1
 
 if $always_include_prefix; then
-  utils/copy_data_dir.sh --spk-prefix sp1.0- --utt-prefix sp1.0- ${srcdir} ${destdir}encode_origin
+  utils/copy_data_dir.sh --spk-prefix sp1.0- --utt-prefix sp1.0- ${srcdir} ${destdir}_speed1.0
   if [ ! -f $srcdir/utt2uniq ]; then
-    cat $srcdir/utt2spk | awk  '{printf("sp1.0-%s %s\n", $1, $1);}' > ${destdir}encode_origin/utt2uniq
+    cat $srcdir/utt2spk | awk  '{printf("sp1.0-%s %s\n", $1, $1);}' > ${destdir}_speed1.0/utt2uniq
   else
-    cat $srcdir/utt2uniq | awk '{printf("sp1.0-%s %s\n", $1, $2);}' > ${destdir}encode_origin/utt2uniq
+    cat $srcdir/utt2uniq | awk '{printf("sp1.0-%s %s\n", $1, $2);}' > ${destdir}_speed1.0/utt2uniq
   fi
-  utils/data/combine_data.sh $destdir ${destdir}encode_origin ${destdir}_encode_alaw ${destdir}_encode_mulaw || exit 1
+  utils/data/combine_data.sh $destdir ${destdir}_speed1.0 ${destdir}_speed0.9 ${destdir}_speed1.1 || exit 1
 
-  rm -r ${destdir}_encode_alaw ${destdir}_encode_mulaw ${destdir}encode_origin
+  rm -r ${destdir}_speed0.9 ${destdir}_speed1.1 ${destdir}_speed1.0
 else
-  utils/data/combine_data.sh $destdir ${srcdir} ${destdir}_encode_alaw ${destdir}_encode_mulaw || exit 1
-  rm -r ${destdir}_encode_alaw ${destdir}_encode_mulaw
+  utils/data/combine_data.sh $destdir ${srcdir} ${destdir}_speed0.9 ${destdir}_speed1.1 || exit 1
+  rm -r ${destdir}_speed0.9 ${destdir}_speed1.1
 fi
 
 echo "$0: generated encoding-perturbed version of data in $srcdir, in $destdir"
