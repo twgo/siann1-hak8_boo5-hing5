@@ -65,7 +65,6 @@ cat $srcdir/utt2spk | utils/apply_map.pl -f 1 $destdir/utt_map  | \
 utils/utt2spk_to_spk2utt.pl <$destdir/utt2spk >$destdir/spk2utt
 
 if [ -f $srcdir/segments ]; then
-  sed -z "s/\n/avconv -i - -f $factor -ar 8000 - | avconv -f $factor -ar 8000 -i - -f wav -ar 8000 - |\n/g" $srcdir/wav.scp > $destdir/wav.scp
   # also apply the spk_prefix to the recording-ids.
   cat $srcdir/wav.scp | awk -v p=$spk_prefix '{printf("%s %s%s\n", $1, p, $1);}' > $destdir/reco_map
 
@@ -83,7 +82,8 @@ if [ -f $srcdir/segments ]; then
   utils/apply_map.pl -f 1 $destdir/reco_map <$srcdir/wav.scp | sed 's/| *$/ |/' | \
     # Handle three cases of rxfilenames appropriately; "input piped command", "file offset" and "filename"
     awk -v factor=$factor \
-        '{wid=$1; $1=""; print wid " avconv -i - -f " factor " -ar 8000 - | avconv -f " factor " -ar 8000 -i - -f wav -ar 8000 - |"}' > $destdir/wav.scp
+
+        '{wid=$1; $1=""; print wid " wav-copy" $_ " - | avconv -i - -f " factor " -ar 8000 - | avconv -f " factor " -ar 8000 -i - -f wav -ar 8000 - |"}' > $destdir/wav.scp
   if [ -f $srcdir/reco2file_and_channel ]; then
     utils/apply_map.pl -f 1 $destdir/reco_map <$srcdir/reco2file_and_channel >$destdir/reco2file_and_channel
   fi
@@ -100,7 +100,7 @@ else # no segments->wav indexed by utterance.
     utils/apply_map.pl -f 1 $destdir/utt_map <$srcdir/wav.scp | sed 's/| *$/ |/' | \
      # Handle three cases of rxfilenames appropriately; "input piped command", "file offset" and "filename"
      awk -v factor=$factor \
-       '{wid=$1; $1=""; print wid $_ " avconv -i - -f " factor " -ar 8000 - | avconv -f " factor " -ar 8000 -i - -f wav -ar 8000 - |"}' > $destdir/wav.scp
+       '{wid=$1; $1=""; print wid " wav-copy" $_ " - | avconv -i - -f " factor " -ar 8000 - | avconv -f " factor " -ar 8000 -i - -f wav -ar 8000 - |"}' > $destdir/wav.scp
   fi
 fi
 
