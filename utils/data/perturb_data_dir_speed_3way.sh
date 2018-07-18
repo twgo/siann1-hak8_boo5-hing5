@@ -60,12 +60,12 @@ if $always_include_prefix; then
   else
     cat $srcdir/utt2uniq | awk '{printf("sp1.0-%s %s\n", $1, $2);}' > ${destdir}_speed1.0/utt2uniq
   fi
-  utils/data/combine_data.sh $destdir ${destdir}_speed1.0 ${destdir}_speed0.9 ${destdir}_speed1.1 || exit 1
+  utils/data/combine_data.sh $destdir ${destdir}_speed1.0 ${destdir}_speed0.9 || exit 1
 
-  rm -r ${destdir}_speed0.9 ${destdir}_speed1.1 ${destdir}_speed1.0
+  rm -r ${destdir}_speed0.9 ${destdir}_speed1.0
 else
-  utils/data/combine_data.sh $destdir ${srcdir} ${destdir}_speed0.9 ${destdir}_speed1.1 || exit 1
-  rm -r ${destdir}_speed0.9 ${destdir}_speed1.1
+  utils/data/combine_data.sh $destdir ${srcdir} ${destdir}_speed0.9 || exit 1
+  rm -r ${destdir}_speed0.9
 fi
 
 echo "$0: generated encoding-perturbed version of data in $srcdir, in $destdir"
