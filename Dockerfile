@@ -87,8 +87,8 @@ WORKDIR $KALDI_S5C
 RUN git pull
 COPY 走訓練.sh 走訓練.sh
 COPY conf/mfcc.conf conf/mfcc.conf
-COPY utils/data/perturb_data_dir_speed_3way.sh utils/data/perturb_data_dir_speed_3way.sh
-COPY utils/data/perturb_data_dir_speed.sh utils/data/perturb_data_dir_speed.sh
+COPY utils/data/perturb_data_dir_encode_alaw_mulaw.sh utils/data/perturb_data_dir_encode_alaw_mulaw.sh
+COPY utils/data/perturb_data_dir_encode.sh utils/data/perturb_data_dir_encode.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
