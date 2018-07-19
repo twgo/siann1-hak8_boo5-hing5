@@ -82,7 +82,6 @@ if [ -f $srcdir/segments ]; then
   utils/apply_map.pl -f 1 $destdir/reco_map <$srcdir/wav.scp | sed 's/| *$/ |/' | \
     # Handle three cases of rxfilenames appropriately; "input piped command", "file offset" and "filename"
     awk -v factor=$factor \
-
         '{wid=$1; $1=""; print wid " wav-copy" $_ " - | avconv -i - -f " factor " -ar 8000 - | avconv -f " factor " -ar 8000 -i - -f wav -ar 8000 - |"}' > $destdir/wav.scp
   if [ -f $srcdir/reco2file_and_channel ]; then
     utils/apply_map.pl -f 1 $destdir/reco_map <$srcdir/reco2file_and_channel >$destdir/reco2file_and_channel
