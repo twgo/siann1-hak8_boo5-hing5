@@ -20,21 +20,6 @@ nj=32
 numLeaves=3000
 numGauss=30000
 
-
-if [ $STAGE -le 1 ]; then
-  utils/utt2spk_to_spk2utt.pl data/train/utt2spk > data/train/spk2utt
-  mv data/train data/train_guan5
-  chmod +x utils/data/perturb_data_dir_encode_alaw_mulaw.sh
-  chmod +x utils/data/perturb_data_dir_encode.sh
-  utils/data/perturb_data_dir_encode_alaw_mulaw.sh data/train_guan5 data/train
-fi
-
-if [ $STAGE -le 2 ]; then
-  rm -rf data/lang_train
-  mkdir -p data/tmp
-  utils/prepare_lang.sh data/local/dict "<UNK>"  data/tmp/lang_train data/lang_train
-fi
-
 # Now make MFCC features.
 if [ $STAGE -le 6 ]; then
   # mfccdir should be some place with a largish disk where you
