@@ -9,7 +9,7 @@
 # a data directory (it operates on the wav.scp).
 
 # If you add the option "--always-include-prefix true", it will include the
-# prefix "sp1.0-" for the original un-perturbed data.  This can help resolve
+# prefix "sporigin-" for the original un-perturbed data.  This can help resolve
 # problems with sorting.
 # We don't make '--always-include-prefix true' the default  behavior because
 # it can break some older scripts that relied on the original utterance-ids
@@ -27,7 +27,7 @@ if [ $# != 2 ]; then
   echo "Note: if <destdir>/feats.scp already exists, this will refuse to run."
   echo "Options:"
   echo "    --always-include-prefix [true|false]   # default: false.  If set to true,"
-  echo "                                           # it will add the prefix 'sp1.0-' to"
+  echo "                                           # it will add the prefix 'sporigin-' to"
   echo "                                           # utterance and speaker-ids for data at"
   echo "                                           # the original speed.  Can resolve"
   echo "                                           # issues RE data sorting."
@@ -54,11 +54,11 @@ utils/data/perturb_data_dir_encode.sh alaw ${srcdir} ${destdir}_alaw || exit 1
 utils/data/perturb_data_dir_encode.sh mulaw ${srcdir} ${destdir}_mulaw || exit 1
 
 if $always_include_prefix; then
-  utils/copy_data_dir.sh --spk-prefix sp1.0- --utt-prefix sp1.0- ${srcdir} ${destdir}_origin
+  utils/copy_data_dir.sh --spk-prefix sporigin- --utt-prefix sporigin- ${srcdir} ${destdir}_origin
   if [ ! -f $srcdir/utt2uniq ]; then
-    cat $srcdir/utt2spk | awk  '{printf("sp1.0-%s %s\n", $1, $1);}' > ${destdir}_origin/utt2uniq
+    cat $srcdir/utt2spk | awk  '{printf("sporigin-%s %s\n", $1, $1);}' > ${destdir}_origin/utt2uniq
   else
-    cat $srcdir/utt2uniq | awk '{printf("sp1.0-%s %s\n", $1, $2);}' > ${destdir}_origin/utt2uniq
+    cat $srcdir/utt2uniq | awk '{printf("sporigin-%s %s\n", $1, $2);}' > ${destdir}_origin/utt2uniq
   fi
   utils/data/combine_data.sh $destdir ${destdir}_origin ${destdir}_alaw ${destdir}_mulaw || exit 1
 
