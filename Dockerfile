@@ -91,7 +91,6 @@ COPY conf/mfcc.conf conf/mfcc.conf
 COPY utils/data/perturb_data_dir_encode_alaw_mulaw.sh utils/data/perturb_data_dir_encode_alaw_mulaw.sh
 COPY utils/data/perturb_data_dir_encode.sh utils/data/perturb_data_dir_encode.sh
 RUN bash -c 'time bash -x 走訓練一.sh  2>&1'
-
 RUN bash -c 'time bash -x 走訓練二.sh  2>&1'
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
