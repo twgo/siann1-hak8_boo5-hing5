@@ -83,6 +83,7 @@ RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisa
 RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/train_free
 RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twisas-text $KALDI_S5C
 
+## 拆走訓練 debug
 WORKDIR $KALDI_S5C
 RUN git pull
 COPY 走訓練一.sh 走訓練一.sh
