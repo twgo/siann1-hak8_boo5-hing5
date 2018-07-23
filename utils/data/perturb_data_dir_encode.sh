@@ -24,12 +24,20 @@ fi
 
 export LC_ALL=C
 
-factor=$1 # alaw, mulaw
+factor=$1 # 0.9=alaw, 1.1=mulaw
 srcdir=$2
 destdir=$3
 label="sp"
 spk_prefix=$label$factor"-"
 utt_prefix=$label$factor"-"
+
+if [ $factor == "0.9" ]; then
+  encode_factor='alaw'
+elif [ $factor == "1.1" ]; then
+  encode_factor='mulaw'
+else
+  factor=$1
+fi
 
 #check is sox on the path
 which sox &>/dev/null
@@ -81,7 +89,7 @@ if [ -f $srcdir/segments ]; then
   #         else  {print wid " sox -t wav" $_ " -t wav - speed " factor " |"}}' > $destdir/wav.scp
   utils/apply_map.pl -f 1 $destdir/reco_map <$srcdir/wav.scp | sed 's/| *$/ |/' | \
     # Handle three cases of rxfilenames appropriately; "input piped command", "file offset" and "filename"
-    awk -v factor=$factor \
+    awk -v factor=$encode_factor \
         '{wid=$1; $1=""; print wid $_ " avconv -i - -f " factor " -ar 8000 - | avconv -f " factor " -ar 8000 -i - -f wav -ar 8000 - |"}' > $destdir/wav.scp
   if [ -f $srcdir/reco2file_and_channel ]; then
     utils/apply_map.pl -f 1 $destdir/reco_map <$srcdir/reco2file_and_channel >$destdir/reco2file_and_channel
@@ -98,7 +106,7 @@ else # no segments->wav indexed by utterance.
     #      else {print wid " sox -t wav" $_ " -t wav - speed " factor " |"}}' > $destdir/wav.scp
     utils/apply_map.pl -f 1 $destdir/utt_map <$srcdir/wav.scp | sed 's/| *$/ |/' | \
      # Handle three cases of rxfilenames appropriately; "input piped command", "file offset" and "filename"
-     awk -v factor=$factor \
+     awk -v factor=$encode_factor \
        '{wid=$1; $1=""; print wid $_ " avconv -i - -f " factor " -ar 8000 - | avconv -f " factor " -ar 8000 -i - -f wav -ar 8000 - |"}' > $destdir/wav.scp
   fi
 fi
