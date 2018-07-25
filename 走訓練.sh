@@ -26,7 +26,7 @@ if [ $STAGE -le 1 ]; then
   mv data/train data/train_guan5
   chmod +x utils/data/perturb_data_dir_speed_3way.sh
   chmod +x utils/data/perturb_data_dir_speed.sh
-  utils/data/perturb_data_dir_speed_3way.sh data/train_guan5 data/train
+  utils/data/perturb_data_dir_encode_alaw_mulaw.sh data/train_guan5 data/train
 fi
 
 if [ $STAGE -le 2 ]; then

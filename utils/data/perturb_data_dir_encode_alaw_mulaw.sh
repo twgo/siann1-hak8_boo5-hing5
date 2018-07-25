@@ -5,7 +5,7 @@
 
 # Apache 2.0
 
-# This script does the standard encoding perturbing of
+# This script does the standard 3-way speed perturbing of
 # a data directory (it operates on the wav.scp).
 
 # If you add the option "--always-include-prefix true", it will include the
@@ -21,7 +21,7 @@ always_include_prefix=false
 
 if [ $# != 2 ]; then
   echo "Usage: perturb_data_dir_speed_3way.sh <srcdir> <destdir>"
-  echo "Applies alaw, mulaw encode"
+  echo "Applies standard 3-way speed perturbation using factors of 0.9, 1.0 and 1.1."
   echo "e.g.:"
   echo " $0 [options] data/train data/train_sp"
   echo "Note: if <destdir>/feats.scp already exists, this will refuse to run."
@@ -47,11 +47,13 @@ if [ -f $destdir/feats.scp ]; then
   exit 1
 fi
 
-echo "$0: making sure the utt2dur file is present in ${srcdir}"
+echo "$0: making sure the utt2dur file is present in ${srcdir}, because "
+echo "... obtaining it after speed-perturbing would be very slow, and"
+echo "... you might need it."
 utils/data/get_utt2dur.sh ${srcdir}
 
-utils/data/perturb_data_dir_speed.sh alaw ${srcdir} ${destdir}_speed0.9 || exit 1
-# utils/data/perturb_data_dir_speed.sh mulaw ${srcdir} ${destdir}_speed1.1 || exit 1
+utils/data/perturb_data_dir_encode.sh 0.9 ${srcdir} ${destdir}_speed0.9 || exit 1
+# utils/data/perturb_data_dir_encode.sh 1.1 ${srcdir} ${destdir}_speed1.1 || exit 1
 
 if $always_include_prefix; then
   utils/copy_data_dir.sh --spk-prefix sp1.0- --utt-prefix sp1.0- ${srcdir} ${destdir}_speed1.0
@@ -68,7 +70,7 @@ else
   rm -r ${destdir}_speed0.9
 fi
 
-echo "$0: generated encoding-perturbed version of data in $srcdir, in $destdir"
+echo "$0: generated 3-way speed-perturbed version of data in $srcdir, in $destdir"
 if ! utils/validate_data_dir.sh --no-feats --no-text $destdir; then
   echo "$0: Validation failed.  If it is a sorting issue, try the option '--always-include-prefix true'."
   exit 1
