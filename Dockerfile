@@ -75,20 +75,20 @@ RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
 RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻莫調 $KALDI_S5C
 
+## 準備 8K 音質
+RUN sed -i -z 's/\n/avconv -i - -f wav -ar 8000 - |\n/g' $KALDI_S5C/data/train/wav.scp
+
 ## 準備free-syllable的inside test
 RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisas-text
 RUN python3 manage.py 轉Kaldi音節text 臺語 $KALDI_S5C/data/train/ $KALDI_S5C/data/train_free
 RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twisas-text $KALDI_S5C
 
-## 準備 8K + mu-law 混合模擬電話音質
-RUN sed -z 's/\n/avconv -i - -f mulaw -ar 8000 - | avconv -f mulaw -ar 8000 -i - -f wav -ar 8000 - |\n/g' $KALDI_S5C/data/train/wav.scp > $KALDI_S5C/data/train/wav-mulaw.scp
-RUN sed -z 's/\n/avconv -i - -f wav -ar 8000 - |\n/g' $KALDI_S5C/data/train/wav.scp > $KALDI_S5C/data/train/wav-8k.scp
-RUN cat $KALDI_S5C/data/train/wav-mulaw.scp > $KALDI_S5C/data/train/wav.scp
-RUN cat $KALDI_S5C/data/train/wav-8k.scp >> $KALDI_S5C/data/train/wav.scp
-
 WORKDIR $KALDI_S5C
 RUN git pull
+COPY 走訓練.sh 走訓練.sh
 COPY conf/mfcc.conf conf/mfcc.conf
+COPY utils/data/perturb_data_dir_encode_alaw_mulaw.sh utils/data/perturb_data_dir_encode_alaw_mulaw.sh
+COPY utils/data/perturb_data_dir_encode.sh utils/data/perturb_data_dir_encode.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
