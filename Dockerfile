@@ -75,7 +75,7 @@ RUN git pull
 
 RUN echo tw01==0.3.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
-RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_kang1-ku7/archive/%E8%87%BA%E7%BE%85-%E9%80%9A%E7%94%A8_%E8%BC%83%E5%9A%B4%E7%9A%84%E8%BD%89%E6%8F%9B%EF%BC%8C%E8%BD%89%E8%A2%82%E9%81%8E%E5%B0%B1%E9%8C%AF%E8%AA%A4.zip
+RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/master.zip
 RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 
 RUN python3 manage.py migrate
