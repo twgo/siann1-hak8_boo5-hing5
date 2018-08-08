@@ -57,7 +57,10 @@ RUN apt-get install git-lfs
 RUN git lfs install
 RUN echo 20180326+20180207twisas
 RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
+WORKDIR /usr/local/pian7sik4_gi2liau7
+RUN git pull
 
+WORKDIR /usr/local/
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
 RUN ln -s /usr/local/pian7sik4_gi2liau7/twisas/db.sqlite3.20180207-1025 db.sqlite3 && ln -s /usr/local/pian7sik4_gi2liau7/twisas/音檔 .
@@ -77,6 +80,7 @@ RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-
 
 RUN python3 manage.py migrate
 RUN python3 manage.py 匯入台文語料庫2版 /usr/local/gi2_liau7_khoo3/twisas2.json
+RUN python3 manage.py 匯入台文語料庫trs /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
