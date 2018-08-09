@@ -59,6 +59,7 @@ RUN echo 20180326+20180207twisas
 RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 WORKDIR /usr/local/pian7sik4_gi2liau7
 RUN git pull
+RUN git pull
 
 WORKDIR /usr/local/
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
