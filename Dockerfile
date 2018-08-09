@@ -64,7 +64,7 @@ WORKDIR /usr/local/
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
 WORKDIR /usr/local/gi2_liau7_khoo3/
 RUN ln -s /usr/local/pian7sik4_gi2liau7/twisas/db.sqlite3.20180207-1025 db.sqlite3 && ln -s /usr/local/pian7sik4_gi2liau7/twisas/音檔 .
-RUN git fetch origin && git branch -a
+RUN git pull
 RUN pip3 install -r requirements.txt
 RUN python3 manage.py 匯出2版語料
 
