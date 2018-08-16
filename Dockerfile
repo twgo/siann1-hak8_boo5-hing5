@@ -57,6 +57,7 @@ RUN apt-get install git-lfs
 RUN git lfs install
 RUN echo 20180326+20180207twisas
 RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
+RUN git pull # twisas-trs, tw0102 pun-tiau
 
 ##  匯入語料
 WORKDIR /usr/local/hok8-bu7/
@@ -67,8 +68,7 @@ RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-
 RUN git pull
 RUN python3 manage.py migrate
 
-RUN python3 manage.py 匯入TW01 /usr/local/pian7sik4_gi2liau7/TW01
-RUN python3 manage.py 匯入TW02 /usr/local/pian7sik4_gi2liau7/TW02
+RUN python3 manage.py 匯入TW0102_json /usr/local/pian7sik4_gi2liau7/
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
