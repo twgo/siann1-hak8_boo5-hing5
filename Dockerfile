@@ -61,6 +61,7 @@ WORKDIR /usr/local/pian7sik4_gi2liau7
 RUN git pull
 RUN git pull # twisas-trs Sin-bun, Kong-po
 RUN git pull # tw0102,twisas-trs pun-tiau
+RUN git pull # tw0102,twisas-trs pun-tiau
 
 
 ##  匯入語料
