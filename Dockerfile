@@ -59,7 +59,8 @@ RUN echo 20180326+20180207twisas
 RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 WORKDIR /usr/local/pian7sik4_gi2liau7
 RUN git pull
-RUN git pull
+RUN git pull # twisas-trs Sin-bun, Kong-po
+RUN git pull # tw0102,twisas-trs pun-tiau
 
 WORKDIR /usr/local/
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
@@ -80,8 +81,8 @@ RUN echo 0809-0936
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/master.zip
 
 RUN python3 manage.py migrate
-RUN python3 manage.py 匯入台文語料庫2版 train /usr/local/gi2_liau7_khoo3/twisas2.json
-RUN python3 manage.py 匯入台文語料庫trs train /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
+RUN python3 manage.py 匯入台文語料庫2版 本調 train /usr/local/gi2_liau7_khoo3/twisas2.json
+RUN python3 manage.py 匯入台文語料庫trs 本調 train /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
