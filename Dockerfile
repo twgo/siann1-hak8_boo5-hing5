@@ -57,7 +57,11 @@ RUN apt-get install git-lfs
 RUN git lfs install
 RUN echo 20180326+20180207twisas
 RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
-RUN git pull # twisas-trs, tw0102 pun-tiau
+WORKDIR /usr/local/pian7sik4_gi2liau7
+RUN git pull
+RUN git pull # twisas-trs Sin-bun, Kong-po
+RUN git pull # tw0102,twisas-trs pun-tiau
+
 
 ##  匯入語料
 WORKDIR /usr/local/hok8-bu7/
