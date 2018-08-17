@@ -60,14 +60,13 @@ RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 WORKDIR /usr/local/pian7sik4_gi2liau7
 RUN git pull
 RUN git pull # twisas-trs Sin-bun, Kong-po
-RUN git pull # tw0102,twisas-trs pun-tiau
-RUN git pull # tw0102,twisas-trs pun-tiau
+RUN git pull # tw0102,twisas-trs guan-pun kah pun-tiau
 
 
 ##  匯入語料
 WORKDIR /usr/local/hok8-bu7/
-RUN echo tw01==0.3.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
+RUN echo tw0102-json
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/master.zip
 RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 RUN git pull
