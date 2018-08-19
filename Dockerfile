@@ -61,6 +61,7 @@ WORKDIR /usr/local/pian7sik4_gi2liau7
 RUN git pull
 RUN git pull # twisas-trs Sin-bun, Kong-po
 RUN git pull # tw0102,twisas-trs pun-tiau
+RUN git pull
 
 WORKDIR /usr/local/
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
@@ -79,8 +80,12 @@ RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
 RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 RUN echo 0819
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/master.zip
+RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/hue7jip8/archive/master.zip
+RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/master.zip
 
 RUN python3 manage.py migrate
+
+RUN python3 manage.py 匯入TW0102_json /usr/local/pian7sik4_gi2liau7/
 RUN python3 manage.py 匯入台文語料庫2版 本調 train /usr/local/gi2_liau7_khoo3/twisas2.json
 RUN python3 manage.py 匯入台文語料庫trs 本調 train --提掉外來詞 /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
 
