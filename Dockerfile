@@ -77,12 +77,12 @@ RUN git pull
 RUN echo tw01==0.3.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
 RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
-RUN echo 0816-1613
+RUN echo 0819
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/master.zip
 
 RUN python3 manage.py migrate
 RUN python3 manage.py 匯入台文語料庫2版 本調 train /usr/local/gi2_liau7_khoo3/twisas2.json
-RUN python3 manage.py 匯入台文語料庫trs 本調 train /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
+RUN python3 manage.py 匯入台文語料庫trs 本調 train --提掉外來詞 /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
