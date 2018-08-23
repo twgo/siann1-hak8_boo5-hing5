@@ -68,13 +68,13 @@ WORKDIR /usr/local/hok8-bu7/
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
 RUN echo tw0102-json
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/hue7jip8/archive/master.zip
-RUN echo 0821
+RUN echo 0823
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/master.zip
 RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 RUN git pull
 RUN python3 manage.py migrate
 
-RUN python3 manage.py 匯入TW0102_json 口語 /usr/local/pian7sik4_gi2liau7/
+RUN python3 manage.py 匯入TW0102_json 莫調 /usr/local/pian7sik4_gi2liau7/
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
