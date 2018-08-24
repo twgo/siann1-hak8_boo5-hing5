@@ -74,7 +74,7 @@ RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-
 RUN git pull
 RUN python3 manage.py migrate
 
-RUN python3 manage.py 匯入TW0102_json 莫調 /usr/local/pian7sik4_gi2liau7/
+RUN python3 manage.py 匯入TW0102_json 莫調分開 /usr/local/pian7sik4_gi2liau7/
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
