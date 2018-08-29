@@ -102,6 +102,7 @@ RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
+RUN sed 's/nj\=[0-9]\+/nj\=60/g' -i 走評估.sh
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
