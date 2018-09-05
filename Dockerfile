@@ -76,6 +76,7 @@ RUN git pull
 
 RUN echo tw01==0.3.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
+RUN echo 0905
 RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 RUN echo 0828
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/master.zip
