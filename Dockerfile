@@ -88,6 +88,8 @@ RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twi
 
 WORKDIR $KALDI_S5C
 RUN git pull
+RUN mv data/train/utt2spk data/train/utt2spk.tsainn
+RUN cat data/train/utt2spk.tsainn | awk '{print $1" "$1}' | cat > data/train/utt2spk
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
