@@ -76,7 +76,7 @@ RUN git pull
 
 RUN echo tw01==0.3.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
-RUN echo 0905
+RUN echo 0908
 RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/kaldi%E7%94%A8%E6%B8%85%E6%B0%A3%E7%9A%84%E5%8F%A5.zip
 RUN echo 0828
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/master.zip
