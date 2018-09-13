@@ -60,7 +60,7 @@ RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 WORKDIR /usr/local/pian7sik4_gi2liau7
 RUN git pull
 RUN git pull # twisas-trs Sin-bun, Kong-po
-RUN git pull # tw0102,twisas-trs pun-tiau
+RUN git pull # tw0102,twisas-trs pun-tiau, siu trs tng-ku, 2018/09/13
 
 WORKDIR /usr/local/
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
