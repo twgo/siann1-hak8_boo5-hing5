@@ -60,8 +60,7 @@ RUN git lfs clone https://github.com/twgo/pian7sik4_gi2liau7.git
 WORKDIR /usr/local/pian7sik4_gi2liau7
 RUN git pull
 RUN git pull # twisas-trs Sin-bun, Kong-po
-RUN git pull # tw0102,twisas-trs pun-tiau
-RUN git pull
+RUN git pull # tw0102,twisas-trs pun-tiau, siu trs tng-ku, AT im-tong 2018/09/14
 
 WORKDIR /usr/local/
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
@@ -77,15 +76,16 @@ RUN git pull
 
 RUN echo tw01==0.3.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
-RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
-RUN echo 0819
+RUN echo 0908
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/kaldi%E7%94%A8%E6%B8%85%E6%B0%A3%E7%9A%84%E5%8F%A5.zip
+RUN echo 0828
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/master.zip
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/hue7jip8/archive/master.zip
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/master.zip
 
 RUN python3 manage.py migrate
 
-RUN python3 manage.py 匯入TW0102_json /usr/local/pian7sik4_gi2liau7/
+RUN python3 manage.py 匯入TW0102_json 莫調分開 /usr/local/pian7sik4_gi2liau7/
 RUN python3 manage.py 匯入台文語料庫2版 本調 train /usr/local/gi2_liau7_khoo3/twisas2.json
 RUN python3 manage.py 匯入台文語料庫trs 本調 train --提掉外來詞 /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
 
@@ -101,10 +101,12 @@ RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twi
 
 WORKDIR $KALDI_S5C
 RUN git pull
+RUN sed 's/nj\=[0-9]\+/nj\=64/g' -i 走訓練.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
 RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
+RUN sed 's/nj\=[0-9]\+/nj\=64/g' -i 走評估.sh
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
