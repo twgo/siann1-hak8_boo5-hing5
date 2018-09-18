@@ -86,8 +86,8 @@ RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_
 RUN python3 manage.py migrate
 
 RUN python3 manage.py 匯入TW0102_json 莫調分開 /usr/local/pian7sik4_gi2liau7/
-RUN python3 manage.py 匯入台文語料庫2版 本調 train /usr/local/gi2_liau7_khoo3/twisas2.json
-RUN python3 manage.py 匯入台文語料庫trs 本調 train --提掉外來詞 /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
+RUN python3 manage.py 匯入台文語料庫2版 口語 train /usr/local/gi2_liau7_khoo3/twisas2.json
+RUN python3 manage.py 匯入台文語料庫trs 口語 train --提掉外來詞 /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
