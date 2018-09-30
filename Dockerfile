@@ -62,12 +62,14 @@ RUN git pull
 RUN git pull # twisas-trs Sin-bun, Kong-po
 RUN git pull # tw0102,twisas-trs guan-pun kah pun-tiau
 RUN git pull # tw0102 dict json
+RUN git pull # 0927
+RUN git lfs pull # 0927
 
 
 ##  匯入語料
 WORKDIR /usr/local/hok8-bu7/
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
-RUN echo tw0102-json
+RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/kati-liokim.zip
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/hue7jip8/archive/master.zip
 RUN echo 0828-1620
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/master.zip
@@ -76,6 +78,8 @@ RUN git pull
 RUN python3 manage.py migrate
 
 RUN python3 manage.py 匯入TW0102_json 莫調分開 /usr/local/pian7sik4_gi2liau7/
+RUN python3 manage.py katiliokim /usr/local/pian7sik4_gi2liau7/kati_liokim
+
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
