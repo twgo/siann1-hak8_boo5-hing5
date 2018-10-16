@@ -94,7 +94,7 @@ RUN python3 manage.py 匯入台文語料庫trs 口語 train --提掉外來詞 /u
 
 RUN pip3 install --upgrade thaktrs
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/%E9%A0%AD%E6%88%B4%E5%BC%8F.zip
-RUN python3 manage.py katiliokim_thaumaiku /usr/local/pian7sik4_gi2liau7/mtk    o-thaumaiku/
+RUN python3 manage.py katiliokim_thaumaiku /usr/local/pian7sik4_gi2liau7/mtko-thaumaiku/
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
