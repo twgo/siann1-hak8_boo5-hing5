@@ -93,7 +93,7 @@ RUN python3 manage.py 匯入台文語料庫2版 口語 train /usr/local/gi2_liau
 RUN python3 manage.py 匯入台文語料庫trs 口語 train --提掉外來詞 /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
 
 RUN pip3 install --upgrade thaktrs
-RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/%E9%A0%AD%    E6%88%B4%E5%BC%8F.zip
+RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/%E9%A0%AD%E6%88%B4%E5%BC%8F.zip
 RUN python3 manage.py katiliokim_thaumaiku /usr/local/pian7sik4_gi2liau7/mtk    o-thaumaiku/
 
 ## 匯出語料
