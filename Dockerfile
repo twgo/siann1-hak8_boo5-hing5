@@ -61,6 +61,9 @@ WORKDIR /usr/local/pian7sik4_gi2liau7
 RUN git pull
 RUN git pull # twisas-trs Sin-bun, Kong-po
 RUN git pull # tw0102,twisas-trs pun-tiau, siu trs tng-ku, AT im-tong 2018/09/14
+RUN git pull # 1015-1610
+RUN git lfs pull # 1015
+
 
 WORKDIR /usr/local/
 RUN git clone https://github.com/i3thuan5/gi2_liau7_khoo3.git
@@ -88,6 +91,10 @@ RUN python3 manage.py migrate
 RUN python3 manage.py 匯入TW0102_json 莫調分開 /usr/local/pian7sik4_gi2liau7/
 RUN python3 manage.py 匯入台文語料庫2版 口語 train /usr/local/gi2_liau7_khoo3/twisas2.json
 RUN python3 manage.py 匯入台文語料庫trs 口語 train --提掉外來詞 /usr/local/pian7sik4_gi2liau7/twisas-trs/twisas-HL-kaldi.json
+
+RUN pip3 install --upgrade thaktrs
+RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/%E9%A0%AD%    E6%88%B4%E5%BC%8F.zip
+RUN python3 manage.py katiliokim_thaumaiku /usr/local/pian7sik4_gi2liau7/mtk    o-thaumaiku/
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
