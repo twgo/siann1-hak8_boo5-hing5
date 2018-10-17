@@ -107,4 +107,5 @@ RUN sed 's/nj\=[0-9]\+/nj\=60/g' -i 走評估.sh
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
+CMD bash -c 'time bash 看結果.sh'
 
