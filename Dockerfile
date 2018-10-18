@@ -94,7 +94,7 @@ RUN python3 manage.py 匯入台文語料庫trs 口語 train --提掉外來詞 /u
 
 RUN pip3 install --upgrade thaktrs
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/%E9%A0%AD%E6%88%B4%E5%BC%8F.zip
-RUN python3 manage.py katiliokim_thaumaiku /usr/local/pian7sik4_gi2liau7/mtko-thaumaiku/
+RUN python3 manage.py tiautsakioktrs /usr/local/pian7sik4_gi2liau7/tiautsakiok-trs
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
@@ -108,6 +108,8 @@ RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做聲韻莫調 $KALDI_S5C/twi
 
 WORKDIR $KALDI_S5C
 RUN git pull
+RUN sed 's/16000/8000/g' -i conf/*
+RUN echo '--allow-downsample=true >> conf/mfcc.conf
 RUN sed 's/nj\=[0-9]\+/nj\=64/g' -i 走訓練.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
