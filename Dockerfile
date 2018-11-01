@@ -91,7 +91,7 @@ RUN python3 manage.py 匯入台文語料庫trs 口語 train --提掉外來詞 /u
 
 ## 匯出語料
 ENV KALDI_S5C /usr/local/kaldi/egs/taiwanese/s5c
-RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做聲韻莫調 $KALDI_S5C
+RUN python3 manage.py 匯出Kaldi格式資料 臺語 拆做音素 $KALDI_S5C
 
 ## 準備free-syllable的inside test
 RUN cat $KALDI_S5C/data/train/text | sed 's/^[^ ]* //g' | cat > $KALDI_S5C/twisas-text
