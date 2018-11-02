@@ -104,3 +104,15 @@ RUN git pull
 RUN sed 's/nj\=[0-9]\+/nj\=64/g' -i 走訓練.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
+RUN utils/subset_data_dir.sh --first data/train_free 2 data/train_dev
+
+WORKDIR /usr/local/hok8-bu7/
+RUN python3 manage.py 轉Kaldi音節fst 臺語 拆做音素 $KALDI_S5C/twisas-text $KALDI_S5C
+
+WORKDIR $KALDI_S5C
+RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
+RUN sed 's/nj\=[0-9]\+/nj\=1/g' -i 走評估.sh
+RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
+
+RUN bash -c 'time bash 看結果.sh'
+
