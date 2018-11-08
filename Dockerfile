@@ -77,8 +77,7 @@ RUN git pull
 RUN echo tw01==0.3.2
 RUN pip3 install --upgrade tai5-uan5_gian5-gi2_hok8-bu7 hue7jip8 tw01 twisas
 RUN echo 0908
-RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/kaldi%E7%94%A8%E6%B8%85%E6%B0%A3%E7%9A%84%E5%8F%A5.zip
-RUN echo 0828
+RUN pip3 install --upgrade https://github.com/i3thuan5/tai5-uan5_gian5-gi2_hok8-bu7/archive/master.zip
 RUN pip3 install --upgrade https://github.com/twgo/twisas/archive/master.zip
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/hue7jip8/archive/master.zip
 RUN pip3 install --upgrade https://github.com/Taiwanese-Corpus/Renyuan-Lyu_2000_TW01/archive/master.zip
@@ -104,9 +103,9 @@ RUN git pull
 RUN sed 's/nj\=[0-9]\+/nj\=64/g' -i 走訓練.sh
 RUN bash -c 'time bash -x 走訓練.sh  2>&1'
 
-RUN utils/subset_data_dir.sh --first data/train_free 2000 data/train_dev
+RUN utils/subset_data_dir.sh --first data/train_free 2 data/train_dev
 RUN bash -c 'time bash -x 產生free-syllable的graph.sh'
-RUN sed 's/nj\=[0-9]\+/nj\=63/g' -i 走評估.sh
+RUN sed 's/nj\=[0-9]\+/nj\=1/g' -i 走評估.sh
 RUN bash -c 'time bash -x 走評估.sh data/lang_free data/train_dev'
 
 RUN bash -c 'time bash 看結果.sh'
